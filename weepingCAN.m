@@ -18,7 +18,8 @@ skipCount = 3; % Skip attack every skipCount-th cycle
 attackRatio = 2; % The number of messages that attacker can send in a period to recover tecA
 
 % Victim's periodic message
-victimMsg = canMessage(100, false, 8);
+idVictim = 100; % Victim's CAN ID
+victimMsg = canMessage(idVictim, false, 8);
 victimMsg.Data = uint8([22 17 56 34 48 59 67 79]);
 
 % Arrays to store TEC values and cycle numbers
