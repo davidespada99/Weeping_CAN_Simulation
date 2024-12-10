@@ -97,8 +97,6 @@ while tecV < 255 && tecA < 255
         % Increment cycle counter
         counter = counter + 1;     
     end
-    % Brief pause of 10 ms between a cycle and the other
-    pause(0.01);
 end
 
 % Cleanup after attack
