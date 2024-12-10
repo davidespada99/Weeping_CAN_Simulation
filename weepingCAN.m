@@ -7,18 +7,18 @@ start(attacker);
 start(victim);
 
 % Simulation parameters
+idVictim = 100; % Victim's CAN ID
 
 tecA = 0; % TEC for Attacker
 tecV = 0; % TEC for Victim
 
 counter = 1; % Total cycles
-attackCounter = 0; % The total effective amount of injections
+skipCount = 0; % Skip attack every skipCount-th cycle
 
-skipCount = 3; % Skip attack every skipCount-th cycle
-attackRatio = 2; % The number of messages that attacker can send in a period to recover tecA
+attackCounter = 0; % The total effective amount of injections
+attackRatio = 5; % The number of messages that attacker can send in a period to recover tecA
 
 % Victim's periodic message
-idVictim = 100; % Victim's CAN ID
 victimMsg = canMessage(idVictim, false, 8);
 victimMsg.Data = uint8([22 17 56 34 48 59 67 79]);
 
@@ -97,7 +97,13 @@ while tecV < 255 && tecA < 255
         % Increment cycle counter
         counter = counter + 1;     
     end
+   
 end
+
+ % Store the last TEC values after the while loop
+ tecA_values = [tecA_values, tecA];
+ tecV_values = [tecV_values, tecV];
+ counter_values = [counter_values, counter - 1];
 
 % Cleanup after attack
 stop(attacker);
