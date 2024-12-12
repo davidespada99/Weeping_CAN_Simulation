@@ -85,12 +85,20 @@ while tecV < 255 && tecA < 255
         disp('Attack Skipped ...');
         
         % Victim sends the message successfully --> decrement tecV
-        tecV = tecV-1;
+        if(tecV-1)<=0
+            tecV = 0;
+        else    
+            tecV = tecV - 1;
+        end
 
         % Attacker then send random messages --> decrements tecA
         for i=1:attackRatio
             transmit(attacker, generateRandomMessage());
-            tecA = tecA-1; % Attacker recovers normally
+            if(tecA-1)<=0
+                tecA = 0;
+            else    
+                tecA = tecA - 1;
+            end
         end
         disp(['Skip, TEC - Attacker: ' num2str(tecA) , ...
             ' Victim: TEC ='  num2str(tecV)]);
