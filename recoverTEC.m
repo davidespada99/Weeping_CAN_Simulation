@@ -7,13 +7,19 @@ function [tecA, tecV] = recoverTEC(tecA, tecV, victim, victimMsg, attacker, atta
     end
     % Now the victim retransmit the message successfully --> decrement tecV
     transmit(victim, victimMsg);
-    tecV = tecV - 1; 
-    
-   
+        if(tecV-1)<=0
+            tecV = 0;
+        else    
+            tecV = tecV - 1;
+        end
     % Attacker sends additional messages and recovers
     for i = 1 : attackRatio
         transmit(attacker, generateRandomMessage());
-        tecA = tecA - 1;
+        if(tecA-1)<=0
+            tecA = 0;
+        else    
+            tecA = tecA - 1;
+        end
     end
 
    
